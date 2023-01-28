@@ -1,10 +1,10 @@
 {
 	"id": "obsidian-revision",
-	"name": "Obsidian Revision Plugin",
+	"name": "Obsidian Revision",
 	"version": "0.0.1",
 	"minAppVersion": "0.15.0",
-	"description": "Obsidian plugin to analyze and annotion text content",
-	"author": "Yvv Wang",
+	"description": "Obsidian plugin to analyze and annotate text content",
+	"author": "@gnavvy",
 	"authorUrl": "https://gnavvy.me",
 	"fundingUrl": "https://obsidian.md/pricing",
 	"isDesktopOnly": false
