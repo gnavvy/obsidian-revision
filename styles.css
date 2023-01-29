@@ -7,6 +7,6 @@ If your plugin does not need CSS, delete this file.
 
 */
 
-.plugin-ribbon-icon {
-  color: #888;
+.decorator-todo {
+  background-color: aqua;
 }

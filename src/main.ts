@@ -23,7 +23,7 @@ export default class RevisionPlugin extends Plugin {
     {
       id: 'decorator:todo',
       name: 'Todo',
-      prefix: `<mark>`,
+      prefix: `<mark class="decorator-todo">`,
       suffix: '</mark>',
     },
   ];
