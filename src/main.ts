@@ -52,12 +52,33 @@ export default class RevisionPlugin extends Plugin {
       editor.replaceSelection(`${prefix}${selection}${suffix}`);
     };
 
+    const removeDecorator = (
+      decorator: MarkdownDecorator,
+      editor: Editor
+    ): void => {
+      const selection = editor.getSelection();
+      const newContent = selection
+        .replace(/<mark.*?[^>]>/g, '')
+        .replace(/<\/mark>/g, '');
+      editor.replaceSelection(newContent);
+    };
+
     this.decorators.forEach((dec) => {
       this.addCommand({
-        id: dec.id,
+        id: `${dec.id}:apply`,
         name: dec.id,
         editorCallback: async (editor: Editor) => {
           applyDecorator(dec, editor);
+          await wait(10);
+          editor.focus();
+        },
+      });
+
+      this.addCommand({
+        id: `${dec.id}:remove`,
+        name: dec.id,
+        editorCallback: async (editor: Editor) => {
+          removeDecorator(dec, editor);
           await wait(10);
           editor.focus();
         },
@@ -70,17 +91,18 @@ export default class RevisionPlugin extends Plugin {
 
     menu.addItem((item) => {
       item.setTitle('Annotate').onClick(async (e) => {
-        // TBA anotate selection
         this.app.commands.executeCommandById(
-          `obsidian-revision:decorator:todo`
+          `obsidian-revision:decorator:todo:apply`
         );
       });
     });
 
     if (selection) {
       menu.addItem((item) => {
-        item.setTitle('Remove Annotation').onClick((e) => {
-          // TBA remove annotated areas
+        item.setTitle('Remove Annotation').onClick(async (e) => {
+          this.app.commands.executeCommandById(
+            `obsidian-revision:decorator:todo:remove`
+          );
         });
       });
     }
