@@ -21,10 +21,10 @@ export default class RevisionPlugin extends Plugin {
   settings: PluginSettings;
   decorators: MarkdownDecorator[] = [
     {
-      id: 'decorator:todo',
-      name: 'Todo',
-      prefix: `<mark class="decorator-todo">`,
-      suffix: '</mark>',
+      id: 'decorator:asm',
+      name: 'Assumption',
+      prefix: `<mark>`,
+      suffix: '</mark><sup class="decorator-asm">#re:asm</sup>',
     },
   ];
 
@@ -59,7 +59,9 @@ export default class RevisionPlugin extends Plugin {
       const selection = editor.getSelection();
       const newContent = selection
         .replace(/<mark.*?[^>]>/g, '')
-        .replace(/<\/mark>/g, '');
+        .replace(/<\/mark>/g, '')
+        .replace(/<sup.*>/g, '')
+        .replace(/<\/sup>/g, '');
       editor.replaceSelection(newContent);
     };
 
@@ -92,7 +94,7 @@ export default class RevisionPlugin extends Plugin {
     menu.addItem((item) => {
       item.setTitle('Annotate').onClick(async (e) => {
         this.app.commands.executeCommandById(
-          `obsidian-revision:decorator:todo:apply`
+          `obsidian-revision:decorator:asm:apply`
         );
       });
     });
@@ -101,7 +103,7 @@ export default class RevisionPlugin extends Plugin {
       menu.addItem((item) => {
         item.setTitle('Remove Annotation').onClick(async (e) => {
           this.app.commands.executeCommandById(
-            `obsidian-revision:decorator:todo:remove`
+            `obsidian-revision:decorator:asm:remove`
           );
         });
       });

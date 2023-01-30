@@ -7,6 +7,20 @@ If your plugin does not need CSS, delete this file.
 
 */
 
-.decorator-todo {
-  background-color: aqua;
+mark {
+  background: linear-gradient(
+    -120deg,
+    hsla(50, 92%, 60%, 0.3),
+    hsla(50, 92%, 60%, 0.5) 90%,
+    hsla(50, 92%, 60%, 0.1)
+  );
+  border-radius: 0 0 0.8em 0.3em;
+  padding: 0.1rem;
+}
+
+.decorator-asm {
+  background: #4a8afc;
+  color: #fff;
+  padding: 1px 3px;
+  border-radius: 4px 4px;
 }
